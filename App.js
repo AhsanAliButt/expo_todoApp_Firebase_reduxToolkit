@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import { Provider } from "react-redux";
+import SignIn from "./src/components/screens/SignIn";
+import TodoApp from "./src/components/screens/todoApp";
+import store from "./src/redux/store/store";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getData } from "./src/redux/slicer/todoSlicer";
+import { selectTodo } from "./src/redux/slicer/todoSlicer";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+function App() {
+  const dispatch = useDispatch();
+  const todo = useSelector((state) => state.todo.todo);
+  useEffect(() => {
+    const data = dispatch(getData());
+  }, []);
+
+  return <TodoApp />;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default () => {
+  return (
+    <Provider store={store}>
+      <StatusBar style="auto" />
+      <App />
+    </Provider>
+  );
+};
