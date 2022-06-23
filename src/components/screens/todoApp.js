@@ -37,8 +37,21 @@ const todoApp = () => {
       >
         Todo App
       </Text>
-      <View style={{ flexDirection: "row" }}>
-        <View style={{ margin: 5, alignItems: "center" }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <View
+          style={{
+            margin: 2,
+            alignItems: "center",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+        >
           <InputForm
             placeholder="Plz Enter Your Task Here"
             onChangeText={(val) => setTodo(val)}
@@ -49,20 +62,19 @@ const todoApp = () => {
               fontSize: 14,
               borderColor: "black",
               borderWidth: 1,
-              borderRadius: 5,
-              padding: 5,
+              borderRadius: 10,
               margin: 5,
+              padding: 4,
+              marginTop: 13,
             }}
           />
-        </View>
-        {/* <View style={{ alignItems: "center" }}>
           {isUpdate ? (
             <TouchableOpacity
               style={{
                 borderWidth: 1,
-                width: "30%",
                 padding: 5,
-                borderRadius: 5,
+                height: 30,
+                borderRadius: 10,
                 backgroundColor: "#f5f5f5",
               }}
               onPress={() => addTodo()}
@@ -70,20 +82,20 @@ const todoApp = () => {
               <Text
                 style={{
                   color: "red",
-                  textAlign: "center",
                   fontWeight: "bold",
+                  padding: 5,
                 }}
               >
-                Update Todo
+                Update
               </Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
               style={{
                 borderWidth: 1,
-                width: "30%",
                 padding: 5,
-                borderRadius: 5,
+                height: 30,
+                borderRadius: 10,
                 backgroundColor: "#f5f5f5",
               }}
               onPress={() => addTodo()}
@@ -91,36 +103,13 @@ const todoApp = () => {
               <Text
                 style={{
                   color: "red",
-                  textAlign: "center",
                   fontWeight: "bold",
                 }}
               >
-                Add Todo
+                Add
               </Text>
             </TouchableOpacity>
           )}
-        </View> */}
-        <View
-          style={{ margin: 5, alignItems: "center", justifyContent: "center" }}
-        >
-          <TouchableOpacity
-            style={{
-              borderWidth: 1,
-              padding: 5,
-              borderRadius: 5,
-              backgroundColor: "#f5f5f5",
-            }}
-            onPress={() => addTodo()}
-          >
-            <Text
-              style={{
-                color: "red",
-                fontWeight: "bold",
-              }}
-            >
-              Update Todo
-            </Text>
-          </TouchableOpacity>
         </View>
       </View>
       <View style={{ alignItems: "center" }}>
