@@ -33,10 +33,8 @@ const InputForm = ({
           borderWidth: 1,
           borderColor: "blue",
           color: "black",
-          width: 250,
+          width: "65%",
           borderRadius: 3,
-          marginLeft: 2,
-          padding: 5,
         }}
         placeholderTextColor="black"
         {...props}

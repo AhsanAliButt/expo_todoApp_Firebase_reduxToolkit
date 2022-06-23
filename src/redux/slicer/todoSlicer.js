@@ -46,15 +46,11 @@ export const toggleComplete = createAsyncThunk(
   }
 );
 
-export const updateData = createAsyncThunk(
-  "todoSlice/updateData",
+export const updateSideEffect = createAsyncThunk(
+  "todoSlice/updateSideEffect",
   async (todo) => {
-    await updateDoc(doc(db, "todo", todo.uid), {
-      ...todo,
-      updatedAt: Timestamp.now(),
-    });
-    const localData = { ...todo, uid: data.id };
-    return localData;
+    await updateDoc(doc(db, "todo", todo.uid), todo);
+    return todo;
   }
 );
 
@@ -64,8 +60,16 @@ const todoSlice = createSlice({
     todo: [],
     error: false,
     pending: false,
+    isUpdate: false,
+    updateTodo: {},
   },
-  reducers: {},
+  reducers: {
+    setIsUpdate: (state, action) => {
+      console.log("SetUpdateReducer:>>", action.payload);
+      state.isUpdate = true;
+      state.updateTodo = action.payload;
+    },
+  },
   extraReducers: {
     [addData.fulfilled]: (state, action) => {
       state.todo = [...state.todo, action.payload];
@@ -107,7 +111,8 @@ const todoSlice = createSlice({
       state.pending = false;
       state.error = true;
     },
-    [updateData.fulfilled]: (state, action) => {
+    [updateSideEffect.fulfilled]: (state, action) => {
+      state.isUpdate = false;
       const data = state.todo.map((item) => {
         if (item.uid === action.payload.uid) {
           return { ...item, ...action.payload };
@@ -115,11 +120,13 @@ const todoSlice = createSlice({
       });
       state.todo = data;
     },
-    [updateData.rejected]: (state, action) => {
+    [updateSideEffect.rejected]: (state, action) => {
       state.pending = false;
       state.error = true;
     },
   },
 });
+
+export const { setIsUpdate } = todoSlice.actions;
 
 export default todoSlice.reducer;
