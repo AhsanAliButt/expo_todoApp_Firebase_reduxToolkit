@@ -83,7 +83,6 @@ const todoApp = () => {
                 style={{
                   color: "red",
                   fontWeight: "bold",
-                  padding: 5,
                 }}
               >
                 Update
